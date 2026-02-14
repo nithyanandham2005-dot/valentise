@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine 💖</title>
+
+<style>
+body{
+    margin:0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg,#4805c4,#fad0c4);
+    text-align:center;
+    color:#0cf766;
+}
+
+.container{
+    padding:20px;
+}
+
+h1{
+    font-size:50px;
+}
+
+.card{
+    background: rgba(255, 255, 255, 0.2);
+    padding:20px;
+    border-radius:20px;
+    margin:15px auto;
+    max-width:600px;
+    backdrop-filter: blur(10px);
+}
+
+button{
+    padding:10px 20px;
+    border:none;
+    border-radius:20px;
+    background:#060c55;
+    color:#78efff;
+    font-size:16px;
+    cursor:pointer;
+    margin:5px;
+}
+
+button:hover{
+    background:#ecd8dc;
+}
+
+.music-box{
+    margin-top:20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>💌 TO MY KAYALVIZHI 💌</h1>
+
+    <div class="card">
+        <h2 id="receiver"></h2>
+        <p><strong>From:</strong> <span id="sender"></span></p>
+        <p><strong>Nickname:</strong> <span id="nickname"></span></p>
+    </div>
+
+    <div class="card">
+        <p id="letter1"></p>
+    </div>
+
+    <div class="card">
+        <p id="letter2"></p>
+    </div>
+
+    <div class="card">
+        <p id="letter3"></p>
+    </div>
+
+    <div class="music-box">
+        <h3>🎵 Our Love Playlist 🎵</h3>
+        <button onclick="prevSong()">⏮ Prev</button>
+        <button onclick="nextSong()">⏭ Next</button>
+        <br><br>
+        <audio id="audioPlayer" controls></audio>
+    </div>
+</div>
+
+<script>
+// Get URL Parameters
+const params = new URLSearchParams(window.location.search);
+
+document.getElementById("receiver").innerText =
+    "To: " + (params.get("receiver") || "My Love");
+
+document.getElementById("sender").innerText =
+    params.get("sender") || "kayalvizhi";
+
+document.getElementById("nickname").innerText =
+    params.get("nickname") || "butter scotch";
+
+document.getElementById("letter1").innerText =
+    params.get("letter1") || "My lover is the most special person in my life. From the moment they came into my world, everything felt brighter and more meaningful. Their smile gives me happiness even on my worst days, and their voice feels like comfort to my heart. Being with them makes me feel safe, understood, and truly loved.";
+
+document.getElementById("letter2").innerText =
+    params.get("letter2") ||  "Our love grows stronger every day They have a beautiful heart filled with kindness and care. The way they support me, encourage my dreams, and stand beside me in every situation shows how strong our bond is. Even during small arguments, our love always brings us back together stronger than before..";
+
+document.getElementById("letter3").innerText =
+    params.get("letter3") || "I promise to love you forever With my lover, every moment becomes a sweet memory. Whether we are talking for hours or sitting silently together, it always feels perfect. I am grateful to have someone who loves me genuinely, and I promise to cherish and protect this love forever. ❤️.";
+
+
+// 🎵 Add Your 4–5 Songs Here (Put MP3 links)
+const songs = [
+    "1.mp3",
+    "2.mp3",
+    "3.mpeg",
+    "4.mp3",
+    "5.mp3",
+    
+];
+
+let currentSong = 0;
+const audioPlayer = document.getElementById("audioPlayer");
+
+function loadSong(index){
+    audioPlayer.src = songs[index];
+    audioPlayer.play();
+}
+
+function nextSong(){
+    currentSong = (currentSong + 1) % songs.length;
+    loadSong(currentSong);
+}
+
+function prevSong(){
+    currentSong = (currentSong - 1 + songs.length) % songs.length;
+    loadSong(currentSong);
+}
+
+// Auto play first song
+loadSong(currentSong);
+
+// Auto next when song ends
+audioPlayer.addEventListener("ended", nextSong);
+
+
+</script>
+
+</body>
+</html>
